@@ -20,3 +20,29 @@
 
 ;; load my module configurations
 (require 'my-ratpoison)
+
+;; Remove some non-usefull graphical elements
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+
+;; let us support colors
+(ansi-color-for-comint-mode-on)
+
+;; Set default browser to firefox
+(setq browse-url-browser-function 'browse-url-firefox
+      browse-url-new-window-flag t
+      browse-url-firefox-new-window-is-tab t)
+
+;; This is for ratpoison.  Do not let ediff open other windows
+(setq ediff-windows-setup-function 'ediff-setup-winows-plain)
+
+;; scroll output automatically as it apears on the *compilation*
+;; buffer
+(setq compilation-scroll-output t)
+
+;; A better way to handle backups IMO
+(setq backup-directory-alist
+      (list
+       (cons ".*"
+	     (expand-file-name  "~/.emacsbackup/"))))
