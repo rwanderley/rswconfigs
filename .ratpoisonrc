@@ -1,0 +1,17 @@
+# rwanderley's ratpoison config file
+#
+# Always start at the home folder
+chdir /home/rwanderley
+
+# Do not want to waste space with border
+set border 0
+
+# Get rid of the mouse
+banish
+
+# Key bindings for frequently used commands
+bind e exec emacs
+bind f exec firefox
+
+# Mainly used to swap Ctrl and Caps
+exec xmodmap ~/.xmodmap
