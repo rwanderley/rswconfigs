@@ -20,6 +20,9 @@
 
 ;; load my module configurations
 (require 'my-ratpoison)
+(require 'my-flyspell)
+(require 'my-erc)
+(require 'my-twit)
 
 ;; Remove some non-usefull graphical elements
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
@@ -46,3 +49,6 @@
       (list
        (cons ".*"
 	     (expand-file-name  "~/.emacsbackup/"))))
+
+;; Had a problem with that one, having to redefine it here
+(global-set-key "\C-x\C-c" 'save-buffers-kill-emacs)
