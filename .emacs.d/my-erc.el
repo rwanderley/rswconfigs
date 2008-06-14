@@ -11,9 +11,16 @@
 
 (erc-services-mode 1)
 
+;; FIXME: not working!
+(defun erc-server-coding-system (target)
+  "Set the encoding systems depending on the server we're at"
+  (if (and erc-server-announced-name
+	   (string-match "localhost" erc-server-announced-name))
+      'iso-8859-1
+    'utf-8))
+
 ;; Set encoding to utf-8
-(setq erc-server-coding-system 'utf-8
-      erc-encoding-coding-alist nil
+(setq erc-encoding-coding-alist nil
       erc-server-coding-system nil)
 
 (erc-spelling-enable)
@@ -71,7 +78,7 @@
   "Count the users in current channel"
   (interactive)
   (let ((n 0))
-    (maphash '(lambda (nick data) (incf n)) erc-channel-users)
+    (maphash '(lambda (nick data) (setq n (+ n 1))) erc-channel-users)
     n))
  
 (defun erc-cmd-COUNT ()
@@ -95,9 +102,9 @@ showing the results on minibuffer"
                                              (not (null buffer-file-name)))))))
  
 (add-hook 'erc-insert-post-hook 'erc-save-buffer-in-logs)
-(add-hook 'erc-mode-hook '(lambda () (when (not (featurep 'xemacs))
-                                       (set (make-variable-buffer-local
-                                             'coding-system-for-write)
-                                            'emacs-mule))))
- 
+(add-hook 'erc-mode-hook '(lambda () 
+			    (set (make-variable-buffer-local
+				  'coding-system-for-write)
+				 'emacs-mule)))
+
 (provide 'my-erc)
