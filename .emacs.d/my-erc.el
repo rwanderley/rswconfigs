@@ -11,15 +11,14 @@
 
 (erc-services-mode 1)
 
-;; FIXME: not working!
-(defun erc-server-coding-system (target)
-  "Set the encoding systems depending on the server we're at"
-  (if (and erc-server-announced-name
-	   (string-match "localhost" erc-server-announced-name))
-      'iso-8859-1
-    'utf-8))
+;; If we're at bitlbee buffer use iso-8859-1, otherwise use utf-8
+(setq erc-server-coding-system
+      '(lambda (target)
+	 (if (and erc-server-announced-name
+		  (string-match "localhost" erc-server-announced-name))
+	     '(iso-8859-1 . undecided)
+	   '(utf-8 . undecided))))
 
-;; Set encoding to utf-8
 (setq erc-encoding-coding-alist nil
       erc-server-coding-system nil)
 
