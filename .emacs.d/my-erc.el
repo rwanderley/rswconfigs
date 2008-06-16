@@ -16,10 +16,10 @@
       '(lambda (target)
 	 (if (and erc-server-announced-name
 		  (string-match "localhost" erc-server-announced-name))
-	     '(iso-8859-1 . undecided)
+	     'iso-8859-1
 	   '(utf-8 . undecided))))
 
-(setq erc-encoding-coding-alist nil
+(setq erc-encoding-coding-alist '(("#archlinux.br" . iso-8859-1))
       erc-server-coding-system nil)
 
 (erc-spelling-enable)

@@ -44,6 +44,12 @@
 ;; buffer
 (setq compilation-scroll-output t)
 
+;; nice having the time displayed on the mini bar.
+(display-time)
+
+;; start emacs server, in order to be able to use emacsclient command
+(server-start)
+
 ;; A better way to handle backups IMO
 (setq backup-directory-alist
       (list
@@ -52,3 +58,13 @@
 
 ;; Had a problem with that one, having to redefine it here
 (global-set-key "\C-x\C-c" 'save-buffers-kill-emacs)
+
+;;; This was installed by package-install.el.
+;;; This provides support for the package system and
+;;; interfacing with ELPA, the package archive.
+;;; Move this code earlier if you want to reference
+;;; packages in your .emacs.
+(when
+    (load
+     (expand-file-name "~/.emacs.d/elpa/package.el"))
+  (package-initialize))
